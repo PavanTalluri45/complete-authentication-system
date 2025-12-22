@@ -19,7 +19,7 @@ const PORT = process.env.PORT || 5000;
    CORS CONFIGURATION
    =============================== */
 const allowedOrigins = [
-    "http://localhost:3000"
+    "https://authenticationsystem-ten.vercel.app"
 ];
 
 app.use(

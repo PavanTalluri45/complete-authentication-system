@@ -10,7 +10,7 @@ const { OAuth2Client } = require("google-auth-library");
 
 // Environment variables
 const EMAIL_SERVICE_URL = "https://complete-authentication-system-ishj.onrender.com";
-const FRONTEND_URL = "http://localhost:3000";
+const FRONTEND_URL = "https://authenticationsystem-ten.vercel.app";
 // OTP Configuration 
 const OTP_CONFIG = {
     MAX_ATTEMPTS_PER_FLOW: 5,           // Maximum OTP requests allowed per flow (signup/login/reset)
@@ -23,7 +23,7 @@ const OTP_CONFIG = {
 const googleClient = new OAuth2Client({
     clientId: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    redirectUri: "http://localhost:3000/api/auth/google/callback"
+    redirectUri: "https://authenticationsystem-ten.vercel.app/api/auth/google/callback"
 });
 
 // Generate OTP (6-digit number)
