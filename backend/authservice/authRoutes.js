@@ -9,7 +9,7 @@ const axios = require("axios");
 const { OAuth2Client } = require("google-auth-library");
 
 // Environment variables
-const EMAIL_SERVICE_URL = "http://localhost:5001";
+const EMAIL_SERVICE_URL = "https://complete-authentication-system-ishj.onrender.com";
 const FRONTEND_URL = "http://localhost:3000";
 // OTP Configuration 
 const OTP_CONFIG = {
