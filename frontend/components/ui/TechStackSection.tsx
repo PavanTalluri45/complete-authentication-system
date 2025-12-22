@@ -89,8 +89,8 @@ const techStack = [
     icon: (
       <div className="h-8 w-8 relative">
         <Image
-          src="/nodemailer.webp"
-          alt="Nodemailer"
+          src="/resend-icon-black.webp"
+          alt="Resend"
           fill
           className="object-cover"
           priority
@@ -98,8 +98,8 @@ const techStack = [
         />
       </div>
     ),
-    name: "Nodemailer",
-    description: "Nodemailer was integrated to handle all email-sending functionality, including user registration confirmations, password resets, and notification emails. I configured multiple transport options including SMTP to ensure reliable email delivery across different email providers and services. The library's support for HTML templates and file attachments allowed me to create professional, branded email communications that enhance user engagement."
+    name: "Resend",
+    description: "Resend was integrated as the centralized email delivery service to manage all application email workflows, including user registration confirmations, password reset flows. The solution leverages Resend’s API-based delivery model to ensure reliable and scalable email sending without direct SMTP management. HTML-based email templates were implemented to deliver clean, professional, and branded communications, improving user experience and engagement. The integration was designed to be environment-agnostic, supporting seamless deployment across development and production environments while maintaining secure API-key-based authentication and robust delivery reliability."
   },
   {
     icon: (
@@ -141,7 +141,7 @@ export function TechStackSection() {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-b from-transparent to-blue-50/50 dark:to-gray-900/50">
+    <section className="py-20 bg-linear-to-b from-transparent to-blue-50/50 dark:to-gray-900/50">
       <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -150,7 +150,7 @@ export function TechStackSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent dark:from-blue-400 dark:to-purple-400 mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent dark:from-blue-400 dark:to-purple-400 mb-4">
             Built with Modern Tech Stack
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">

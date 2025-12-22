@@ -173,7 +173,7 @@ export function HeroSection() {
 
       {/* Dynamic grid overlay */}
       <div
-        className="absolute inset-0 bg-[size:50px_50px] md:bg-[size:70px_70px]"
+        className="absolute inset-0 bg-size-[50px_50px] md:bg-size-[70px_70px]"
         style={{
           backgroundImage: `linear-gradient(${currentColors.grid} 1px, transparent 1px),
                            linear-gradient(90deg, ${currentColors.grid} 1px, transparent 1px)`
@@ -249,7 +249,7 @@ export function HeroSection() {
               className="px-4"
             >
               <a
-                href="https://github.com/blastgamer59/Autentication__System"
+                href="https://github.com/blastgamer59/complete-authentication-system"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 px-8 py-4 rounded-xl transition-all duration-300 font-semibold group w-full sm:w-auto justify-center"
