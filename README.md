@@ -1,22 +1,13 @@
 # 🔐 Complete Authentication System
 
 A **full-stack, production-ready authentication system** built using modern technologies and best-practice architecture patterns.
-This project implements a **secure, scalable, and modular authentication flow** suitable for real-world applications.
+This project delivers a **secure, scalable, and modular authentication flow** suitable for real-world applications.
 
----
 
-## 📌 Project Status
-
-✅ **Core Development Complete**
-🚀 **Deployment Scheduled:** *Tomorrow*
-
-All major authentication features have been implemented and tested locally. The remaining work focuses on final deployment, environment configuration, and production hardening.
-
----
 
 ## 📝 Introduction
 
-This project delivers a **complete authentication solution** including:
+This project provides a **complete authentication solution** including:
 
 * User registration & login
 * Secure session handling
@@ -24,7 +15,7 @@ This project delivers a **complete authentication solution** including:
 * Email verification & password recovery
 * Microservice-oriented backend design
 
-The system is designed with **scalability, security, and maintainability** in mind, following modern full-stack and backend architecture principles.
+The system is designed with **scalability, security, and maintainability** as first-class priorities, following modern full-stack and backend architecture principles.
 
 ---
 
@@ -34,30 +25,43 @@ The system is designed with **scalability, security, and maintainability** in mi
 
 * **Next.js (TypeScript)**
 * **Tailwind CSS**
-* **Shadcn UI**
+* **shadcn/ui**
 * **Axios**
 
 ### Backend
 
 * **Node.js**
 * **Express.js**
-* **RESTful API**
+* **RESTful APIs**
 * **JWT Authentication**
-* **Refresh Token Strategy**
+* **Refresh Token Rotation**
 * **Redis**
 
 ### Database
 
 * **MySQL**
 
+---
 
-### Architecture
+## 🏗️ Architecture
 
-* **Microservice-Based Design**
+### Microservice-Based Design
 
-  * Auth Service
-  * Email Service
- 
+* **Auth Service**
+
+  * User registration, login, logout
+  * JWT access & refresh token issuance
+  * Session and token rotation logic
+
+* **Email Service**
+
+  * Email verification
+  * Password reset workflows
+  * Async email delivery
+
+This separation improves **scalability**, **fault isolation**, and **maintainability**.
+
+---
 
 ## ⭐ Features
 
@@ -70,32 +74,30 @@ The system is designed with **scalability, security, and maintainability** in mi
 * Protected Routes (Frontend & Backend)
 * API Rate Limiting
 * Microservice Communication
-* Environment-based Configuration
-
-
-## 🔐 Authentication Flow Overview
-
-1. User registers → verification email sent
-2. Email verified → account activated
-3. Login returns access & refresh tokens
-4. Protected routes validated via middleware
-5. Refresh tokens rotate securely
-6. Logout invalidates active sessions
+* Environment-Based Configuration
+* Redis-backed Session & Token Storage
 
 ---
 
-## 🧪 Testing
+## 🔐 Authentication Flow
 
-* Unit tests for core authentication logic
-* API testing via Postman / REST Client
-* Manual end-to-end flow testing
+1. User registers → verification email sent
+2. Email verified → account activated
+3. Login returns **access & refresh tokens**
+4. Protected routes validated via middleware
+5. Refresh tokens rotate securely
+6. Logout invalidates active sessions
 
 
 ## 🛡️ Security Considerations
 
 * HTTP-only cookies
 * Token expiration & rotation
-* Rate limiting
-* Password hashing (bcrypt)
+* Refresh token reuse detection
+* API rate limiting
+* Password hashing with **bcrypt**
 * Environment-based secrets
 * Input validation & sanitization
+* Secure CORS configuration
+
+
