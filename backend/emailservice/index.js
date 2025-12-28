@@ -4,7 +4,7 @@ const cors = require("cors");
 const { v4: uuidv4 } = require("uuid");
 const { query } = require("./db/db");
 const templates = require("./templates");
-const { Resend } = require("resend");
+const nodemailer = require("nodemailer");
 
 dotenv.config();
 
@@ -12,7 +12,7 @@ const app = express();
 const port = process.env.PORT || 5001;
 
 const allowedOrigins = [
-    "http://localhost:3000"
+    "https://authenticationsystem-ten.vercel.app"
 ];
 
 app.use(
@@ -30,8 +30,16 @@ app.use(
 );
 app.use(express.json());
 
-// Create Resend client
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Create Nodemailer transporter
+const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+    }
+});
 
 // Helper function to log email to database (non-blocking)
 const logEmail = (emailData) => {
@@ -67,18 +75,15 @@ app.post("/api/email/send-otp", async (req, res) => {
             otp
         });
 
-        // Send email using Resend
-        const { data, error } = await resend.emails.send({
-            from: 'SecureApp <onboarding@resend.dev>', // Change this to your verified domain
-            to: [to_email],
+        // Send email using Nodemailer
+        const mailOptions = {
+            from: `"SecureApp" <${process.env.EMAIL_USER}>`,
+            to: to_email,
             subject: "Your Verification Code - SecureApp",
             html: htmlTemplate
-        });
+        };
 
-        if (error) {
-            console.error("Resend OTP error:", error);
-            throw error;
-        }
+        const result = await transporter.sendMail(mailOptions);
 
         // Log the email to database (background)
         logEmail({
@@ -91,7 +96,7 @@ app.post("/api/email/send-otp", async (req, res) => {
         res.json({
             success: true,
             message: "OTP email sent successfully",
-            data: data
+            data: result
         });
 
     } catch (error) {
@@ -136,18 +141,15 @@ app.post("/api/email/send-reset", async (req, res) => {
             reset_url
         });
 
-        // Send email using Resend
-        const { data, error } = await resend.emails.send({
-            from: 'SecureApp <onboarding@resend.dev>', // Change this to your verified domain
-            to: [to_email],
+        // Send email using Nodemailer
+        const mailOptions = {
+            from: `"SecureApp" <${process.env.EMAIL_USER}>`,
+            to: to_email,
             subject: "Reset Your Password - SecureApp",
             html: htmlTemplate
-        });
+        };
 
-        if (error) {
-            console.error("Resend reset email error:", error);
-            throw error;
-        }
+        const result = await transporter.sendMail(mailOptions);
 
         // Log the email to database (background)
         logEmail({
@@ -159,7 +161,7 @@ app.post("/api/email/send-reset", async (req, res) => {
         res.json({
             success: true,
             message: "Reset email sent successfully",
-            data: data
+            data: result
         });
 
     } catch (error) {
