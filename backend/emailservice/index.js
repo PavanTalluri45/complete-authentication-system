@@ -4,7 +4,7 @@ const cors = require("cors");
 const { v4: uuidv4 } = require("uuid");
 const { query } = require("./db/db");
 const templates = require("./templates");
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 
 dotenv.config();
 
@@ -30,16 +30,8 @@ app.use(
 );
 app.use(express.json());
 
-// Create Nodemailer transporter
-const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-    }
-});
+// Initialize Resend
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Helper function to log email to database (non-blocking)
 const logEmail = (emailData) => {
@@ -75,15 +67,17 @@ app.post("/api/email/send-otp", async (req, res) => {
             otp
         });
 
-        // Send email using Nodemailer
-        const mailOptions = {
-            from: `"SecureApp" <${process.env.EMAIL_USER}>`,
+        // Send email using Resend
+        const { data, error } = await resend.emails.send({
+            from: "Acme <onboarding@resend.dev>",
             to: to_email,
             subject: "Your Verification Code - SecureApp",
-            html: htmlTemplate
-        };
+            html: htmlTemplate,
+        });
 
-        const result = await transporter.sendMail(mailOptions);
+        if (error) {
+            throw new Error(error.message);
+        }
 
         // Log the email to database (background)
         logEmail({
@@ -96,7 +90,7 @@ app.post("/api/email/send-otp", async (req, res) => {
         res.json({
             success: true,
             message: "OTP email sent successfully",
-            data: result
+            data: data
         });
 
     } catch (error) {
@@ -141,15 +135,17 @@ app.post("/api/email/send-reset", async (req, res) => {
             reset_url
         });
 
-        // Send email using Nodemailer
-        const mailOptions = {
-            from: `"SecureApp" <${process.env.EMAIL_USER}>`,
+        // Send email using Resend
+        const { data, error } = await resend.emails.send({
+            from: "Acme <onboarding@resend.dev>",
             to: to_email,
             subject: "Reset Your Password - SecureApp",
-            html: htmlTemplate
-        };
+            html: htmlTemplate,
+        });
 
-        const result = await transporter.sendMail(mailOptions);
+        if (error) {
+             throw new Error(error.message);
+        }
 
         // Log the email to database (background)
         logEmail({
@@ -161,7 +157,7 @@ app.post("/api/email/send-reset", async (req, res) => {
         res.json({
             success: true,
             message: "Reset email sent successfully",
-            data: result
+            data: data
         });
 
     } catch (error) {
@@ -189,7 +185,7 @@ app.post("/api/email/send-reset", async (req, res) => {
 });
 
 app.get("/", (req, res) => {
-    res.send("EmailService is running...");
+    res.send("EmailService (Resend) is running...");
 });
 
 app.listen(port, () => {
