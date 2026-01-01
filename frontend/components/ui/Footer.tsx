@@ -22,13 +22,13 @@ export function Footer() {
   const socialLinks = [
     {
       icon: <Github className="h-5 w-5" />,
-      href: "https://github.com/blastgamer59?tab=repositories",
+      href: "https://github.com/PavanTalluri45",
       label: "GitHub",
       color: "hover:bg-black hover:text-white dark:hover:bg-gray-100 dark:hover:text-gray-900"
     },
     {
       icon: <Linkedin className="h-5 w-5" />,
-      href: "https://www.linkedin.com/in/pavankumar59/",
+      href: "https://www.linkedin.com/in/pavankumartalluri45/",
       label: "LinkedIn",
       color: "hover:bg-[#2563EB] hover:text-white dark:hover:bg-[#2563EB] dark:hover:text-white"
     },

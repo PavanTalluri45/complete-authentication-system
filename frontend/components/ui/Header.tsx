@@ -31,13 +31,13 @@ import {
   Moon,
   Monitor,
   LogOut,
-  User,
   Palette,
   Check,
   Menu,
   X,
 } from "lucide-react";
-import { authAPI, clearAuthCookies } from "@/lib/api"; 
+import { authAPI, clearAuthCookies } from "@/lib/api";
+import { Spinner } from "@/components/ui/spinner";
 
 type Theme = "light" | "dark" | "system";
 
@@ -78,7 +78,7 @@ export function Header({ onSignOut, isSigningOut }: HeaderProps) {
       try {
         setLoading(true);
         const response = await authAPI.getCurrentUser();
-        
+
         if (response.data.success) {
           setUser(response.data.user);
         } else {
@@ -163,7 +163,7 @@ export function Header({ onSignOut, isSigningOut }: HeaderProps) {
   // Get user initials for avatar
   const getUserInitials = () => {
     if (!user?.full_name) return 'U';
-    
+
     const names = user.full_name.trim().split(' ');
     if (names.length >= 2) {
       return (names[0].charAt(0) + names[names.length - 1].charAt(0)).toUpperCase();
@@ -207,7 +207,7 @@ export function Header({ onSignOut, isSigningOut }: HeaderProps) {
                 AuthFlow
               </Button>
             </motion.div>
-            
+
             {/* Loading avatar */}
             <div className="h-10 w-10 rounded-full bg-gray-200 dark:bg-gray-700 animate-pulse" />
           </div>
@@ -376,7 +376,7 @@ export function Header({ onSignOut, isSigningOut }: HeaderProps) {
               >
                 <div className="px-4 py-6 space-y-4">
                   {/* User Info */}
-                  <div 
+                  <div
                     className="flex items-center gap-3 p-3 rounded-lg"
                     style={{
                       backgroundColor: isDark ? "rgba(31, 41, 55, 0.5)" : "rgba(249, 250, 251, 0.8)"
@@ -460,9 +460,16 @@ export function Header({ onSignOut, isSigningOut }: HeaderProps) {
             <AlertDialogAction
               onClick={confirmSignOut}
               disabled={isSigningOut}
-              className="bg-red-600 hover:bg-red-700 focus:ring-red-600 text-white"
+              className="bg-red-600 hover:bg-red-700 focus:ring-red-600 text-white flex items-center"
             >
-              {isSigningOut ? "Signing out..." : "Sign out"}
+              {isSigningOut ? (
+                <>
+                  <Spinner className="mr-2 h-4 w-4 text-white" />
+                  Signing out...
+                </>
+              ) : (
+                "Sign out"
+              )}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

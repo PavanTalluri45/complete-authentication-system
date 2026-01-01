@@ -233,7 +233,7 @@ export function HeroSection() {
                 dual-layer <span className="font-semibold" style={{ color: currentColors.accent }}>JWT tokens</span> and real-time session control via
                 <span className="font-semibold" style={{ color: currentColors.accent }}> Redis</span>. Persistent data is handled through optimized
                 <span className="font-semibold" style={{ color: currentColors.accent }}> MySQL</span> schemas, while transactional emails run through
-                <span className="font-semibold" style={{ color: currentColors.accent }}> Nodemailer</span>. The UI blends
+                <span className="font-semibold" style={{ color: currentColors.accent }}> Resend Email Service</span>. The UI blends
                 <span className="font-semibold" style={{ color: currentColors.accent }}> Tailwind CSS</span> and
                 <span className="font-semibold" style={{ color: currentColors.accent }}> Shadcn</span> components, enhanced with subtle
                 <span className="font-semibold" style={{ color: currentColors.accent }}> Framer Motion</span> animations for a clean, modern experience.
@@ -249,7 +249,7 @@ export function HeroSection() {
               className="px-4"
             >
               <a
-                href="https://github.com/blastgamer59/complete-authentication-system"
+                href="https://github.com/PavanTalluri45/complete-authentication-system"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 px-8 py-4 rounded-xl transition-all duration-300 font-semibold group w-full sm:w-auto justify-center"

@@ -1,13 +1,5 @@
-import { redirect } from "next/navigation";
-import { cookies } from "next/headers";
+import InitialLoader from "@/components/ui/InitialLoader";
 
-export default async function Home() {
-  const cookieStore = await cookies();
-  const refreshToken = cookieStore.get("refreshToken");
-
-  if (refreshToken) {
-    redirect("/home");
-  } else {
-    redirect("/auth/login");
-  }
+export default function Home() {
+  return <InitialLoader />;
 }
